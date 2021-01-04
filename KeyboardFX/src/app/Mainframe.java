@@ -47,7 +47,7 @@ public class Mainframe {
         int volume = 5;
         int instrument = 0;
         String[] instruments = { "PIANO", "E.PIANO", "ORGAN", "HARPE", "STRINGS" };
-        List<AudioInputStream> soundsLibrary = new ArrayList<AudioInputStream>();
+        // List<AudioInputStream> soundsLibrary = new ArrayList<AudioInputStream>();
         List<Clip> soundClips = new ArrayList<Clip>();
 
         public void powerSwitch() {
@@ -91,7 +91,7 @@ public class Mainframe {
         }
 
         public void updateSoundsLibrary() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-            soundsLibrary.clear();
+            soundClips.clear();
             for (int i = 1; i < 62; i++) {
                 File file = new File(String.format("src/app/pianoSounds%d/sound%d.wav", this.instrument, i));
                 AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
@@ -270,7 +270,7 @@ public class Mainframe {
     // int calibration = 0;
 
     void decideAction(int x, int y) {
-        System.out.println(String.format("x is %d, y is %d", x, y));
+        // System.out.println(String.format("x is %d, y is %d", x, y));
 
         // System.out.println(String.format("Calibrating button %d, %s x is %d, %s y is
         // %d", calibration / 2,
