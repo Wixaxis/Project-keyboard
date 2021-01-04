@@ -1,5 +1,7 @@
 package app;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,40 +11,95 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javax.sound.sampled.*;
 
 public class Mainframe {
     boolean[] blackInOctave = { false, true, false, true, false, false, true, false, true, false, true, false };
     List<Button> blackKeys = new ArrayList<Button>();
     List<Button> whiteKeys = new ArrayList<Button>();
+    List<Button> functionKeys = new ArrayList<Button>();
     int[] blackKeyPositions = { 15, 17, 20, 22, 24, 27, 29, 32, 34, 36, 39, 41, 44, 46, 48, 51, 53, 56, 58, 60, 63, 65,
             68, 70, 72 };
+    int[] whiteKeyPositions = { 14, 16, 18, 19, 21, 23, 25, 26, 28, 30, 31, 33, 35, 37, 38, 40, 42, 43, 45, 47, 49, 50,
+            52, 54, 55, 57, 59, 61, 62, 64, 66, 67, 69, 71, 73 };
+    int[] functionKeyPositions = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
+
+    // class Sound {
+    // Clip sound1;
+    // Clip sound2;
+    // boolean tic = true;
+
+    // Sound(Clip sound1, Clip sound2) {
+    // this.sound1 = sound1;
+    // this.sound2 = sound2;
+    // sound1.start();
+    // }
+
+    // public void play(){
+    // if(tic){
+    // // sound1.
+    // }
+    // }
+    // }
 
     class CurrentStatus {
         boolean ON = false;
         int volume = 5;
         int instrument = 0;
         String[] instruments = { "PIANO", "E.PIANO", "ORGAN", "HARPE", "STRINGS" };
+        List<AudioInputStream> soundsLibrary = new ArrayList<AudioInputStream>();
+        List<Clip> soundClips = new ArrayList<Clip>();
 
         public void powerSwitch() {
             this.ON = !this.ON;
+            if (this.ON) {
+                System.out.println("Turning ON");
+                this.volume = 5;
+                this.instrument = 0;
+            } else {
+                System.out.println("Turning OFF");
+                this.volume = 0;
+            }
         }
 
         public void volumeUp() {
-            if (this.volume < 10)
+            if (this.volume < 10 && this.ON)
                 this.volume++;
         }
 
         public void volumeDown() {
-            if (this.volume > 0)
+            if (this.volume > 0 && this.ON)
                 this.volume--;
         }
 
         public void setInstrument(int option) {
+            if (this.ON == false)
+                return;
             if (option < 0)
                 option = 0;
             if (option > 4)
                 option = 4;
             this.instrument = option;
+
+            try {
+                updateSoundsLibrary();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+        }
+
+        public void updateSoundsLibrary() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+            soundsLibrary.clear();
+            for (int i = 1; i < 62; i++) {
+                File file = new File(String.format("src/app/pianoSounds%d/sound%d.wav", this.instrument, i));
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+                // soundsLibrary.add(audioStream);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioStream);
+                soundClips.add(clip);
+            }
         }
     }
 
@@ -121,18 +178,93 @@ public class Mainframe {
         assert TheImage != null : "fx:id=\"TheImage\" was not injected: check your FXML file 'Mainframe.fxml'.";
         assert StatusLabel != null : "fx:id=\"StatusLabel\" was not injected: check your FXML file 'Mainframe.fxml'.";
 
+        for (int i : functionKeyPositions)
+            functionKeys.add(buttons[i]);
+        for (int i : blackKeyPositions)
+            blackKeys.add(buttons[i]);
+        for (int i : whiteKeyPositions)
+            whiteKeys.add(buttons[i]);
+        displayCurrentStatus();
+        try {
+            currStat.updateSoundsLibrary();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void mouseClickKeyboard(MouseEvent event) {
-        // System.out.println(String.format("x is %d, y is %d", (int) event.getX(),
-        // (int) event.getY()));
         decideAction((int) event.getX(), (int) event.getY());
     }
 
     void displayCurrentStatus() {
         StatusLabel.setText(String.format("Power: %s | Volume: %d | Instrument: %s", currStat.ON ? "ON" : "OFF",
                 currStat.volume, currStat.instruments[currStat.instrument]));
+    }
+
+    int getFunctionKey(int x, int y) {
+        for (Button btn : functionKeys)
+            if (btn.check(x, y))
+                return btn.function;
+        return -1;
+    }
+
+    int getSoundKey(int x, int y) {
+        for (Button btn : blackKeys)
+            if (btn.check(x, y))
+                return btn.function;
+        for (Button btn : whiteKeys)
+            if (btn.check(x, y))
+                return btn.function;
+        return -1;
+    }
+
+    void runFunction(int fun) {
+        if (-1 == fun) {
+            System.out.println("No function key pressed");
+            return;
+        }
+        if (0 == fun)
+            currStat.powerSwitch();
+        if (1 == fun)
+            currStat.volumeUp();
+        if (2 == fun)
+            currStat.volumeDown();
+        if (fun > 2 && fun < 8)
+            currStat.setInstrument(fun - 3);
+
+    }
+
+    void playSound(int sound) {
+        if (-1 == sound) {
+            System.out.println("No sound key pressed");
+            return;
+        }
+        if (currStat.ON == false) {
+            System.out.println("Power is off");
+            return;
+        }
+        // try {
+        // Clip clip = AudioSystem.getClip();
+        // clip.open(currStat.soundsLibrary.get(sound - 14 + 1));
+        // clip.start();
+        // clip.close();
+        Clip clip = currStat.soundClips.get(sound - 14 + 1);
+        if (clip.isRunning()) {
+            clip.stop();
+        }
+        clip.setMicrosecondPosition(0);
+        clip.start();
+        // } catch (LineUnavailableException | IOException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
+
+    }
+
+    class ConcurrentSoundPlayer {
+
     }
 
     // int calibration = 0;
@@ -145,10 +277,14 @@ public class Mainframe {
         // calibration % 2 == 0 ? "left" : "right", x, calibration % 2 == 0 ? "left" :
         // "right", y));
         // calibration++;
-        for (Button btn : buttons) {
-            if (btn.check(x, y))
-                System.out.println("Button " + btn.function + " clicked");
-        }
+        // for (Button btn : buttons) {
+        // if (btn.check(x, y))
+        // System.out.println("Button " + btn.function + " clicked");
+        // }
+        if (y < upperKeyBorder)
+            runFunction(getFunctionKey(x, y));
+        else
+            playSound(getSoundKey(x, y));
         displayCurrentStatus();
     }
 
