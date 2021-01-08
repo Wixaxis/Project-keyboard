@@ -303,7 +303,7 @@ public class Mainframe {
         Clip clip = currStat.soundClips.get(sound - 14 + 1);
         FloatControl gain = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         float dB = (float) (Math.log(currStat.volume + 1) / Math.log(10) * 20) - 15.0f;
-        System.out.println("Setting dB as " + dB);
+        // System.out.println("Setting dB as " + dB);
         try {
             gain.setValue(dB);
         } catch (Exception e) {
