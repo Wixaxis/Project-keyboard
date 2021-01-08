@@ -14,6 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javax.sound.sampled.*;
 
 public class Mainframe {
+    private static final boolean calibrationMode = false;
+
     boolean[] blackInOctave = { false, true, false, true, false, false, true, false, true, false, true, false };
     List<Button> blackKeys = new ArrayList<Button>();
     List<Button> whiteKeys = new ArrayList<Button>();
@@ -24,31 +26,174 @@ public class Mainframe {
             52, 54, 55, 57, 59, 61, 62, 64, 66, 67, 69, 71, 73 };
     int[] functionKeyPositions = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
 
-    // class Sound {
-    // Clip sound1;
-    // Clip sound2;
-    // boolean tic = true;
+    class Button {
+        int xLeft;
+        int xRight;
+        int yUp;
+        int yDown;
+        int function;
 
-    // Sound(Clip sound1, Clip sound2) {
-    // this.sound1 = sound1;
-    // this.sound2 = sound2;
-    // sound1.start();
-    // }
+        Button(int lx, int uy, int rx, int dy, int fun) {
+            this.xLeft = lx;
+            this.xRight = rx;
+            this.yUp = uy;
+            this.yDown = dy;
+            this.function = fun;
+        }
 
-    // public void play(){
-    // if(tic){
-    // // sound1.
-    // }
-    // }
-    // }
+        Button(int lx, int rx, int fun) {
+            this(lx, upperKeyBorder, rx, blackInOctave[(fun - 14) % 12] ? lowerBlackBorder : lowerWhiteBorder, fun);
+        }
+
+        public boolean check(int x, int y) {
+            if (x >= xLeft && x <= xRight && y >= yUp && y <= yDown)
+                return true;
+            return false;
+        }
+    }
+
+    int upperKeyBorder = 144; // y upper key border
+    int lowerWhiteBorder = 335;// y lower white key border
+    int lowerBlackBorder = 265;// y lower black key border
+    final Button[] buttons = { // buttons placements
+            new Button(320, 83, 339, 104, 0), // Button power
+            new Button(357, 75, 374, 91, 1), // Button volume up
+            new Button(357, 98, 374, 113, 2), // Button volume down
+
+            new Button(395, 83, 416, 105, 3), // Button instrument 0
+            new Button(422, 83, 442, 105, 4), // Button instrument 1
+            new Button(449, 83, 468, 105, 5), // Button instrument 2
+            new Button(474, 83, 494, 105, 6), // Button instrument 3
+            new Button(501, 83, 520, 105, 7), // Button instrument 4
+
+            new Button(568, 83, 588, 105, 8), // Button dummy
+            new Button(618, 83, 638, 105, 9), // Button dummy
+            new Button(646, 83, 665, 105, 10), // Button dummy
+            new Button(673, 83, 692, 105, 11), // Button dummy
+            new Button(714, 83, 733, 105, 12), // Button dummy
+            new Button(742, 83, 759, 105, 13), // Button dummy
+
+            new Button(61, 90, 14), // Button white
+            new Button(80, 96, 15), // Button black
+            new Button(91, 124, 16), // Button white
+            new Button(119, 136, 17), // Button black
+            new Button(125, 155, 18), // Button white
+            new Button(156, 186, 19), // Button white
+            new Button(174, 191, 20), // Button black
+            new Button(187, 219, 21), // Button white
+            new Button(211, 227, 22), // Button black
+            new Button(220, 252, 23), // Button white
+            new Button(249, 265, 24), // Button black
+            new Button(253, 283, 25), // Button white
+
+            new Button(284, 315, 26), // Button
+            new Button(304, 320, 27), // Button black
+            new Button(316, 347, 28), // Button
+            new Button(342, 360, 29), // Button black
+            new Button(348, 379, 30), // Button
+            new Button(380, 410, 31), // Button
+            new Button(400, 416, 32), // Button black
+            new Button(411, 443, 33), // Button
+            new Button(436, 453, 34), // Button black
+            new Button(444, 477, 35), // Button
+            new Button(473, 491, 36), // Button black
+            new Button(478, 509, 37), // Button
+
+            new Button(510, 539, 38), // Button
+            new Button(529, 546, 39), // Button black
+            new Button(540, 572, 40), // Button
+            new Button(569, 586, 41), // Button black
+            new Button(573, 605, 42), // Button
+            new Button(606, 637, 43), // Button
+            new Button(624, 642, 44), // Button black
+            new Button(638, 670, 45), // Button
+            new Button(662, 678, 46), // Button black
+            new Button(671, 702, 47), // Button
+            new Button(698, 716, 48), // Button black
+            new Button(703, 735, 49), // Button
+
+            new Button(736, 766, 50), // Button
+            new Button(755, 773, 51), // Button black
+            new Button(767, 800, 52), // Button
+            new Button(795, 813, 53), // Button black
+            new Button(801, 832, 54), // Button
+            new Button(833, 863, 55), // Button
+            new Button(851, 870, 56), // Button black
+            new Button(864, 898, 57), // Button
+            new Button(888, 906, 58), // Button black
+            new Button(899, 929, 59), // Button
+            new Button(925, 943, 60), // Button black
+            new Button(930, 962, 61), // Button
+
+            new Button(963, 994, 62), // Button
+            new Button(982, 1000, 63), // Button black
+            new Button(995, 1027, 64), // Button
+            new Button(1021, 1041, 65), // Button black
+            new Button(1028, 1059, 66), // Button
+            new Button(1060, 1090, 67), // Button
+            new Button(1078, 1096, 68), // Button black
+            new Button(1091, 1125, 69), // Button
+            new Button(1116, 1134, 70), // Button black
+            new Button(1126, 1158, 71), // Button
+            new Button(1153, 1172, 72), // Button black
+            new Button(1159, 1189, 73), // Button
+
+            new Button(1190, 1222, 74) };// Button
+
+    private CurrentStatus currStat = new CurrentStatus();
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private AnchorPane MainAnPane;
+
+    @FXML
+    private ImageView TheImage;
+
+    @FXML
+    private Label StatusLabel;
+
+    @FXML
+    void initialize() {
+        assert MainAnPane != null : "fx:id=\"MainAnPane\" was not injected: check your FXML file 'Mainframe.fxml'.";
+        assert TheImage != null : "fx:id=\"TheImage\" was not injected: check your FXML file 'Mainframe.fxml'.";
+        assert StatusLabel != null : "fx:id=\"StatusLabel\" was not injected: check your FXML file 'Mainframe.fxml'.";
+
+        TheImage.fitWidthProperty().bind(MainAnPane.widthProperty());
+        TheImage.fitHeightProperty().bind(MainAnPane.heightProperty());
+
+        for (int i : functionKeyPositions)
+            functionKeys.add(buttons[i]);
+        for (int i : blackKeyPositions)
+            blackKeys.add(buttons[i]);
+        for (int i : whiteKeyPositions)
+            whiteKeys.add(buttons[i]);
+        displayCurrentStatus();
+        try {
+            currStat.updateSoundsLibrary();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+        // currStat.setInitialSize();
+    }
+
+    @FXML
+    void mouseClickKeyboard(MouseEvent event) {
+        decideAction(currStat.getRelativeCoordinate(event.getX()), currStat.getRelativeCoordinate(event.getY()));
+    }
 
     class CurrentStatus {
         boolean ON = false;
         int volume = 5;
         int instrument = 0;
         String[] instruments = { "PIANO", "E.PIANO", "ORGAN", "HARPE", "STRINGS" };
-        // List<AudioInputStream> soundsLibrary = new ArrayList<AudioInputStream>();
         List<Clip> soundClips = new ArrayList<Clip>();
+        public boolean widthInitialised = true;
+        double initialWidth = 1284;
 
         public void powerSwitch() {
             this.ON = !this.ON;
@@ -84,7 +229,6 @@ public class Mainframe {
             try {
                 updateSoundsLibrary();
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -95,107 +239,16 @@ public class Mainframe {
             for (int i = 1; i < 62; i++) {
                 File file = new File(String.format("src/app/pianoSounds%d/sound%d.wav", this.instrument, i));
                 AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-                // soundsLibrary.add(audioStream);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioStream);
                 soundClips.add(clip);
             }
         }
-    }
 
-    class Button {
-        int xLeft;
-        int xRight;
-        int yUp;
-        int yDown;
-        int function;
-
-        Button(int lx, int uy, int rx, int dy, int fun) {
-            this.xLeft = lx;
-            this.xRight = rx;
-            this.yUp = uy;
-            this.yDown = dy;
-            this.function = fun;
+        public int getRelativeCoordinate(double xory) {
+            double currWidth = TheImage.getFitWidth();
+            return (int) (xory * (initialWidth / currWidth));
         }
-
-        Button(int lx, int rx, int fun) {
-            this(lx, upperKeyBorder, rx, blackInOctave[(fun - 14) % 12] ? lowerBlackBorder : lowerWhiteBorder, fun);
-        }
-
-        public boolean check(int x, int y) {
-            if (x >= xLeft && x <= xRight && y >= yUp && y <= yDown)
-                return true;
-            return false;
-        }
-    }
-
-    int upperKeyBorder = 166; // y upper key border
-    int lowerWhiteBorder = 360;// y lower white key border
-    int lowerBlackBorder = 290;// y lower black key border
-    Button[] buttons = { new Button(325, 105, 346, 125, 0), new Button(365, 97, 380, 111, 1),
-            new Button(366, 119, 379, 134, 2), new Button(403, 105, 422, 124, 3), new Button(431, 105, 449, 125, 4),
-            new Button(457, 105, 476, 125, 5), new Button(483, 105, 502, 125, 6), new Button(510, 105, 528, 124, 7),
-            new Button(568, 105, 588, 126, 8), new Button(618, 105, 638, 125, 9), new Button(646, 105, 665, 125, 10),
-            new Button(673, 104, 692, 125, 11), new Button(714, 105, 733, 124, 12), new Button(742, 104, 759, 125, 13),
-            new Button(63, 91, 14), new Button(82, 98, 15), new Button(96, 124, 16), new Button(120, 138, 17),
-            new Button(128, 156, 18), new Button(159, 189, 19), new Button(178, 194, 20), new Button(190, 222, 21),
-            new Button(215, 232, 22), new Button(225, 254, 23), new Button(253, 269, 24), new Button(261, 287, 25),
-            new Button(290, 320, 26), new Button(309, 326, 27), new Button(321, 353, 28), new Button(349, 366, 29),
-            new Button(355, 386, 30), new Button(387, 419, 31), new Button(406, 424, 32), new Button(418, 450, 33),
-            new Button(444, 461, 34), new Button(452, 483, 35), new Button(481, 499, 36), new Button(486, 517, 37),
-            new Button(519, 550, 38), new Button(538, 555, 39), new Button(549, 581, 40), new Button(578, 596, 41),
-            new Button(586, 615, 42), new Button(617, 648, 43), new Button(635, 653, 44), new Button(647, 681, 45),
-            new Button(673, 691, 46), new Button(683, 714, 47), new Button(711, 728, 48), new Button(714, 747, 49),
-            new Button(749, 780, 50), new Button(768, 784, 51), new Button(780, 814, 52), new Button(809, 826, 53),
-            new Button(813, 847, 54), new Button(847, 880, 55), new Button(866, 884, 56), new Button(877, 913, 57),
-            new Button(903, 922, 58), new Button(914, 945, 59), new Button(942, 959, 60), new Button(943, 980, 61),
-            new Button(979, 1013, 62), new Button(999, 1018, 63), new Button(1012, 1046, 64),
-            new Button(1038, 1058, 65), new Button(1045, 1078, 66), new Button(1077, 1113, 67),
-            new Button(1097, 1116, 68), new Button(1111, 1145, 69), new Button(1134, 1154, 70),
-            new Button(1146, 1179, 71), new Button(1172, 1192, 72), new Button(1178, 1211, 73),
-            new Button(1209, 1244, 74) };
-
-    private CurrentStatus currStat = new CurrentStatus();
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private AnchorPane MainAnPane;
-
-    @FXML
-    private ImageView TheImage;
-
-    @FXML
-    private Label StatusLabel;
-
-    @FXML
-    void initialize() {
-        assert MainAnPane != null : "fx:id=\"MainAnPane\" was not injected: check your FXML file 'Mainframe.fxml'.";
-        assert TheImage != null : "fx:id=\"TheImage\" was not injected: check your FXML file 'Mainframe.fxml'.";
-        assert StatusLabel != null : "fx:id=\"StatusLabel\" was not injected: check your FXML file 'Mainframe.fxml'.";
-
-        for (int i : functionKeyPositions)
-            functionKeys.add(buttons[i]);
-        for (int i : blackKeyPositions)
-            blackKeys.add(buttons[i]);
-        for (int i : whiteKeyPositions)
-            whiteKeys.add(buttons[i]);
-        displayCurrentStatus();
-        try {
-            currStat.updateSoundsLibrary();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void mouseClickKeyboard(MouseEvent event) {
-        decideAction((int) event.getX(), (int) event.getY());
     }
 
     void displayCurrentStatus() {
@@ -233,7 +286,6 @@ public class Mainframe {
             currStat.volumeDown();
         if (fun > 2 && fun < 8)
             currStat.setInstrument(fun - 3);
-
     }
 
     void playSound(int sound) {
@@ -245,47 +297,30 @@ public class Mainframe {
             System.out.println("Power is off");
             return;
         }
-        // try {
-        // Clip clip = AudioSystem.getClip();
-        // clip.open(currStat.soundsLibrary.get(sound - 14 + 1));
-        // clip.start();
-        // clip.close();
         Clip clip = currStat.soundClips.get(sound - 14 + 1);
         if (clip.isRunning()) {
             clip.stop();
         }
         clip.setMicrosecondPosition(0);
         clip.start();
-        // } catch (LineUnavailableException | IOException e) {
-        // // TODO Auto-generated catch block
-        // e.printStackTrace();
-        // }
-
     }
-
-    class ConcurrentSoundPlayer {
-
-    }
-
-    // int calibration = 0;
+    int calibration = 0;
 
     void decideAction(int x, int y) {
-        // System.out.println(String.format("x is %d, y is %d", x, y));
-
-        // System.out.println(String.format("Calibrating button %d, %s x is %d, %s y is
-        // %d", calibration / 2,
-        // calibration % 2 == 0 ? "left" : "right", x, calibration % 2 == 0 ? "left" :
-        // "right", y));
-        // calibration++;
-        // for (Button btn : buttons) {
-        // if (btn.check(x, y))
-        // System.out.println("Button " + btn.function + " clicked");
-        // }
-        if (y < upperKeyBorder)
-            runFunction(getFunctionKey(x, y));
-        else
-            playSound(getSoundKey(x, y));
-        displayCurrentStatus();
+        if (calibrationMode) {
+            System.out.println(String.format("Calibrating button %d, %s x is %d, %s y is %d", calibration / 2,
+                    calibration % 2 == 0 ? "left" : "right", x, calibration % 2 == 0 ? "up" : "bottom", y));
+            calibration++;
+        } else {
+            for (Button btn : buttons) {
+                if (btn.check(x, y))
+                    System.out.println("Button " + btn.function + " clicked");
+            }
+            if (y < upperKeyBorder)
+                runFunction(getFunctionKey(x, y));
+            else
+                playSound(getSoundKey(x, y));
+            displayCurrentStatus();
+        }
     }
-
 }

@@ -16,6 +16,8 @@ public class App extends Application {
 
             primaryStage.setTitle("KeyboardFX");
             primaryStage.setScene(scene);
+            primaryStage.setWidth(1300);
+            primaryStage.setHeight(420);
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -26,6 +28,5 @@ public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 
 }

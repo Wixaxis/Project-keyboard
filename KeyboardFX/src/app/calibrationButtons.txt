@@ -1,0 +1,240 @@
+Calibrating button 0, left x is 319, up y is 83
+Calibrating button 0, right x is 339, bottom y is 104 power 
+
+Calibrating button 1, left x is 357, up y is 75
+Calibrating button 1, right x is 374, bottom y is 91 vol +
+
+Calibrating button 2, left x is 358, up y is 98
+Calibrating button 2, right x is 374, bottom y is 113 vol -
+
+
+
+Calibrating button 3, left x is 395, up y is 83
+Calibrating button 3, right x is 416, bottom y is 105 instrument 0
+
+Calibrating button 4, left x is 422, up y is 83
+Calibrating button 4, right x is 442, bottom y is 104 instrument 1
+
+Calibrating button 5, left x is 449, up y is 83
+Calibrating button 5, right x is 468, bottom y is 105 instrument 2
+
+Calibrating button 6, left x is 474, up y is 83
+Calibrating button 6, right x is 494, bottom y is 104 instrument 3
+
+Calibrating button 7, left x is 501, up y is 84
+Calibrating button 7, right x is 520, bottom y is 104 instrument 4
+
+
+
+Calibrating button 8, left x is 557, up y is 83
+Calibrating button 8, right x is 578, bottom y is 106 dummy
+
+Calibrating button 9, left x is 607, up y is 84
+Calibrating button 9, right x is 628, bottom y is 105 dummy
+
+Calibrating button 10, left x is 634, up y is 83
+Calibrating button 10, right x is 654, bottom y is 105 dummy
+
+Calibrating button 11, left x is 661, up y is 83
+Calibrating button 11, right x is 680, bottom y is 105 dummy
+
+Calibrating button 12, left x is 701, up y is 83
+Calibrating button 12, right x is 721, bottom y is 104 dummy
+
+Calibrating button 13, left x is 727, up y is 83
+Calibrating button 13, right x is 747, bottom y is 104 dummy
+
+
+
+Calibrating button 14, left x is 61, up y is 144
+Calibrating button 14, right x is 89, bottom y is 334 keys...
+
+Calibrating button 15, left x is 80, up y is 144
+Calibrating button 15, right x is 96, bottom y is 266
+
+Calibrating button 16, left x is 91, up y is 144
+Calibrating button 16, right x is 122, bottom y is 334
+
+Calibrating button 17, left x is 119, up y is 144
+Calibrating button 17, right x is 136, bottom y is 266
+
+Calibrating button 18, left x is 126, up y is 143
+Calibrating button 18, right x is 154, bottom y is 334
+
+Calibrating button 19, left x is 156, up y is 143
+Calibrating button 19, right x is 186, bottom y is 334
+
+Calibrating button 20, left x is 174, up y is 144
+Calibrating button 20, right x is 191, bottom y is 265
+
+Calibrating button 21, left x is 187, up y is 143
+Calibrating button 21, right x is 218, bottom y is 335
+
+Calibrating button 22, left x is 211, up y is 144
+Calibrating button 22, right x is 227, bottom y is 267
+
+Calibrating button 23, left x is 221, up y is 143
+Calibrating button 23, right x is 250, bottom y is 334
+
+Calibrating button 24, left x is 248, up y is 144
+Calibrating button 24, right x is 265, bottom y is 266
+
+Calibrating button 25, left x is 255, up y is 143
+Calibrating button 25, right x is 283, bottom y is 334
+
+
+
+Calibrating button 26, left x is 285, up y is 144
+Calibrating button 26, right x is 315, bottom y is 335
+
+Calibrating button 27, left x is 304, up y is 143
+Calibrating button 27, right x is 320, bottom y is 266
+
+Calibrating button 28, left x is 317, up y is 144
+Calibrating button 28, right x is 347, bottom y is 334
+
+Calibrating button 29, left x is 342, up y is 143
+Calibrating button 29, right x is 360, bottom y is 266
+
+Calibrating button 30, left x is 349, up y is 144
+Calibrating button 30, right x is 379, bottom y is 335
+
+Calibrating button 31, left x is 381, up y is 144
+Calibrating button 31, right x is 411, bottom y is 334
+
+Calibrating button 32, left x is 400, up y is 144
+Calibrating button 32, right x is 416, bottom y is 267
+
+Calibrating button 33, left x is 410, up y is 143
+Calibrating button 33, right x is 443, bottom y is 334
+
+Calibrating button 34, left x is 436, up y is 142
+Calibrating button 34, right x is 453, bottom y is 267
+
+Calibrating button 35, left x is 445, up y is 142
+Calibrating button 35, right x is 476, bottom y is 334
+
+Calibrating button 36, left x is 473, up y is 144
+Calibrating button 36, right x is 491, bottom y is 265
+
+Calibrating button 37, left x is 479, up y is 143
+Calibrating button 37, right x is 509, bottom y is 334
+
+
+
+Calibrating button 38, left x is 510, up y is 145
+Calibrating button 38, right x is 540, bottom y is 334
+
+Calibrating button 39, left x is 529, up y is 143
+Calibrating button 39, right x is 546, bottom y is 266
+
+Calibrating button 40, left x is 539, up y is 144
+Calibrating button 40, right x is 572, bottom y is 334
+
+Calibrating button 41, left x is 569, up y is 145
+Calibrating button 41, right x is 586, bottom y is 266
+
+Calibrating button 42, left x is 573, up y is 143
+Calibrating button 42, right x is 605, bottom y is 334
+
+Calibrating button 43, left x is 606, up y is 144
+Calibrating button 43, right x is 638, bottom y is 334
+
+Calibrating button 44, left x is 624, up y is 143
+Calibrating button 44, right x is 642, bottom y is 267
+
+Calibrating button 45, left x is 637, up y is 143
+Calibrating button 45, right x is 670, bottom y is 334
+
+Calibrating button 46, left x is 662, up y is 143
+Calibrating button 46, right x is 678, bottom y is 267
+
+Calibrating button 47, left x is 670, up y is 143
+Calibrating button 47, right x is 701, bottom y is 334
+
+Calibrating button 48, left x is 698, up y is 143
+Calibrating button 48, right x is 716, bottom y is 267
+
+Calibrating button 49, left x is 704, up y is 143
+Calibrating button 49, right x is 735, bottom y is 335
+
+
+
+Calibrating button 50, left x is 736, up y is 144
+Calibrating button 50, right x is 767, bottom y is 334
+
+Calibrating button 51, left x is 755, up y is 143
+Calibrating button 51, right x is 773, bottom y is 267
+
+Calibrating button 52, left x is 766, up y is 144
+Calibrating button 52, right x is 800, bottom y is 336
+
+Calibrating button 53, left x is 795, up y is 144
+Calibrating button 53, right x is 813, bottom y is 266
+
+Calibrating button 54, left x is 802, up y is 142
+Calibrating button 54, right x is 832, bottom y is 335
+
+Calibrating button 55, left x is 833, up y is 144
+Calibrating button 55, right x is 865, bottom y is 335
+
+Calibrating button 56, left x is 851, up y is 144
+Calibrating button 56, right x is 870, bottom y is 266
+
+Calibrating button 57, left x is 863, up y is 143
+Calibrating button 57, right x is 898, bottom y is 335
+
+Calibrating button 58, left x is 888, up y is 144
+Calibrating button 58, right x is 906, bottom y is 267
+
+Calibrating button 59, left x is 898, up y is 143
+Calibrating button 59, right x is 930, bottom y is 334
+
+Calibrating button 60, left x is 925, up y is 144
+Calibrating button 60, right x is 943, bottom y is 266
+
+Calibrating button 61, left x is 929, up y is 143
+Calibrating button 61, right x is 963, bottom y is 335
+
+
+
+Calibrating button 62, left x is 962, up y is 144
+Calibrating button 62, right x is 996, bottom y is 335
+
+Calibrating button 63, left x is 982, up y is 144
+Calibrating button 63, right x is 1000, bottom y is 266
+
+Calibrating button 64, left x is 993, up y is 143
+Calibrating button 64, right x is 1028, bottom y is 334
+
+Calibrating button 65, left x is 1021, up y is 143
+Calibrating button 65, right x is 1041, bottom y is 266
+
+Calibrating button 66, left x is 1027, up y is 143
+Calibrating button 66, right x is 1060, bottom y is 335
+
+Calibrating button 67, left x is 1059, up y is 144
+Calibrating button 67, right x is 1093, bottom y is 335
+
+Calibrating button 68, left x is 1078, up y is 143
+Calibrating button 68, right x is 1096, bottom y is 266
+
+Calibrating button 69, left x is 1090, up y is 144
+Calibrating button 69, right x is 1125, bottom y is 335
+
+Calibrating button 70, left x is 1116, up y is 144
+Calibrating button 70, right x is 1134, bottom y is 266
+
+Calibrating button 71, left x is 1125, up y is 143
+Calibrating button 71, right x is 1158, bottom y is 333
+
+Calibrating button 72, left x is 1153, up y is 144
+Calibrating button 72, right x is 1172, bottom y is 266
+
+Calibrating button 73, left x is 1158, up y is 143
+Calibrating button 73, right x is 1190, bottom y is 334
+
+
+
+Calibrating button 74, left x is 1189, up y is 145
+Calibrating button 74, right x is 1222, bottom y is 336

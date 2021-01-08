@@ -4,20 +4,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#mouseClickKeyboard" prefHeight="421.0" prefWidth="1306.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Mainframe">
+<AnchorPane fx:id="MainAnPane" prefHeight="362.0" prefWidth="1306.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Mainframe">
    <children>
-      <AnchorPane fx:id="MainAnPane" layoutY="19.0">
-         <children>
-            <ImageView fx:id="TheImage" fitHeight="560.0" fitWidth="1306.0" preserveRatio="true" smooth="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <image>
-                  <Image url="@keyboard.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <Label fx:id="StatusLabel" layoutX="9.0" layoutY="399.0" prefHeight="17.0" prefWidth="1277.0" text="Label" textAlignment="CENTER" />
+      <ImageView fx:id="TheImage" fitHeight="560.0" fitWidth="1306.0" onMouseClicked="#mouseClickKeyboard" preserveRatio="true" smooth="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@keyboard.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="StatusLabel" layoutX="7.0" layoutY="361.0" prefHeight="17.0" prefWidth="1278.0" text="Label" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" />
    </children>
-</Pane>
+</AnchorPane>
