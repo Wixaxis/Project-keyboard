@@ -178,7 +178,6 @@ public class Mainframe {
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
-        // currStat.setInitialSize();
     }
 
     @FXML
@@ -297,13 +296,26 @@ public class Mainframe {
             System.out.println("Power is off");
             return;
         }
+        if (currStat.volume == 0) {
+            System.out.println("Volume is 0");
+            return;
+        }
         Clip clip = currStat.soundClips.get(sound - 14 + 1);
+        FloatControl gain = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        float dB = (float) (Math.log(currStat.volume + 1) / Math.log(10) * 20) - 15.0f;
+        System.out.println("Setting dB as " + dB);
+        try {
+            gain.setValue(dB);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (clip.isRunning()) {
             clip.stop();
         }
         clip.setMicrosecondPosition(0);
         clip.start();
     }
+
     int calibration = 0;
 
     void decideAction(int x, int y) {
@@ -312,10 +324,6 @@ public class Mainframe {
                     calibration % 2 == 0 ? "left" : "right", x, calibration % 2 == 0 ? "up" : "bottom", y));
             calibration++;
         } else {
-            for (Button btn : buttons) {
-                if (btn.check(x, y))
-                    System.out.println("Button " + btn.function + " clicked");
-            }
             if (y < upperKeyBorder)
                 runFunction(getFunctionKey(x, y));
             else
