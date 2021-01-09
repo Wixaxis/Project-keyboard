@@ -5,13 +5,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="MainAnPane" prefHeight="362.0" prefWidth="1306.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Mainframe">
+<AnchorPane fx:id="mainAnPane" prefHeight="362.0" prefWidth="1306.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Mainframe">
    <children>
-      <ImageView fx:id="TheImage" fitHeight="560.0" fitWidth="1306.0" onMouseClicked="#mouseClickKeyboard" preserveRatio="true" smooth="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fx:id="theImage" fitHeight="560.0" fitWidth="1306.0" onMouseClicked="#mouseClickKeyboard" preserveRatio="true" smooth="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@keyboard.png" />
          </image>
       </ImageView>
-      <Label fx:id="StatusLabel" layoutX="7.0" layoutY="361.0" prefHeight="17.0" prefWidth="1278.0" text="Label" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" />
+      <Label fx:id="statusLabel" layoutX="7.0" layoutY="361.0" prefHeight="17.0" prefWidth="1278.0" text="Label" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" />
    </children>
 </AnchorPane>

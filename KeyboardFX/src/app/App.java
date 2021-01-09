@@ -9,8 +9,8 @@ import javafx.stage.Stage;
 
 public class App extends Application {
     
-    private final int width = 1300;
-    private final int height = 420;
+    private static final int WIDTH = 1300;
+    private static final int HEIGHT = 420;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -22,8 +22,8 @@ public class App extends Application {
             
             primaryStage.setTitle("KeyboardFX");
             primaryStage.setScene(scene);
-            primaryStage.setWidth(width);
-            primaryStage.setHeight(height);
+            primaryStage.setWidth(WIDTH);
+            primaryStage.setHeight(HEIGHT);
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
