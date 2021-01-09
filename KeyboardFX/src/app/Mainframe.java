@@ -19,6 +19,7 @@ public class Mainframe {
     private int calibration = 0;
     private static final boolean CALIBRATION_MODE = false;
     private CurrentStatus currStat = new CurrentStatus();
+    private SoundPlayer soundPlayer = SoundPlayer.getSoundPlayer();
     private final boolean[] blackInOctave = { false, true, false, true, false, false, true, false, true, false, true, false };
     private final List<Button> blackKeys = new ArrayList<>();
     private final List<Button> whiteKeys = new ArrayList<>();
@@ -159,27 +160,29 @@ public class Mainframe {
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
+
+        soundPlayer.setCurrentStatus(currStat);
     }
 
     @FXML
     void mouseClickKeyboard(MouseEvent event) {
-        decideAction(currStat.getRelativeCoordinate(event.getX()), currStat.getRelativeCoordinate(event.getY()));
+        decideAction(currStat.getRelativeCoordinate(theImage.getFitWidth(), event.getX()), currStat.getRelativeCoordinate(theImage.getFitWidth(), event.getY()));
     }
 
 
-    void displayCurrentStatus() {
+    private void displayCurrentStatus() {
         statusLabel.setText(String.format("Power: %s | Volume: %d | Instrument: %s", currStat.ON ? "ON" : "OFF",
                 currStat.volume, currStat.instruments[currStat.instrument]));
     }
 
-    int getFunctionKey(int x, int y) {
+    private int getFunctionKey(int x, int y) {
         for (Button btn : functionKeys)
             if (btn.check(x, y))
                 return btn.function;
         return -1;
     }
 
-    int getSoundKey(int x, int y) {
+    private int getSoundKey(int x, int y) {
         for (Button btn : blackKeys)
             if (btn.check(x, y))
                 return btn.function;
@@ -189,7 +192,7 @@ public class Mainframe {
         return -1;
     }
 
-    void runFunction(int fun) {
+    private void runFunction(int fun) {
         if (-1 == fun) {
             System.out.println("No function key pressed");
             return;
@@ -204,7 +207,7 @@ public class Mainframe {
             currStat.setInstrument(fun - 3);
     }
 
-    void playSound(int sound) {
+    public void playSound(int sound) {
         if (-1 == sound) {
             System.out.println("No sound key pressed");
             return;
@@ -236,7 +239,7 @@ public class Mainframe {
         clip.start();
     }    
 
-    void decideAction(int x, int y) {
+    private void decideAction(int x, int y) {
         if (CALIBRATION_MODE) {
             System.out.println(String.format("Calibrating button %d, %s x is %d, %s y is %d", calibration / 2,
                     calibration % 2 == 0 ? "left" : "right", x, calibration % 2 == 0 ? "up" : "bottom", y));
@@ -271,70 +274,6 @@ public class Mainframe {
 
         public boolean check(int x, int y) {
             return (x >= xLeft && x <= xRight && y >= yUp && y <= yDown);
-        }
-    }
-
-    private class CurrentStatus {
-        private boolean ON = false;
-        private int volume = 5;
-        private int instrument = 0;
-        private final String[] instruments = { "PIANO", "E.PIANO", "ORGAN", "HARPE", "STRINGS" };
-        private List<Clip> soundClips = new ArrayList<>();
-        private double initialWidth = 1284;
-
-        public void powerSwitch() {
-            this.ON = !this.ON;
-            if (this.ON) {
-                System.out.println("Turning ON");
-                this.volume = 5;
-                this.instrument = 0;
-            } else {
-                System.out.println("Turning OFF");
-                this.volume = 0;
-            }
-        }
-
-        public void volumeUp() {
-            if (this.volume < 10 && this.ON)
-                this.volume++;
-        }
-
-        public void volumeDown() {
-            if (this.volume > 0 && this.ON)
-                this.volume--;
-        }
-
-        public void setInstrument(int option) {
-            if (!this.ON)
-                return;
-            if (option < 0)
-                option = 0;
-            if (option > 4)
-                option = 4;
-            this.instrument = option;
-
-            try {
-                updateSoundsLibrary();
-            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        public void updateSoundsLibrary() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-            soundClips.clear();
-            for (int i = 1; i < 62; i++) {
-                File file = new File(String.format("src/app/pianoSounds%d/sound%d.wav", this.instrument, i));
-                AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioStream);
-                soundClips.add(clip);
-            }
-        }
-
-        public int getRelativeCoordinate(double xory) {
-            double currWidth = theImage.getFitWidth();
-            return (int) (xory * (initialWidth / currWidth));
         }
     }
 }
