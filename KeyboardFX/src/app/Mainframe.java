@@ -17,9 +17,9 @@ public class Mainframe {
     private static final boolean calibrationMode = false;
 
     boolean[] blackInOctave = { false, true, false, true, false, false, true, false, true, false, true, false };
-    List<Button> blackKeys = new ArrayList<Button>();
-    List<Button> whiteKeys = new ArrayList<Button>();
-    List<Button> functionKeys = new ArrayList<Button>();
+    List<Button> blackKeys = new ArrayList<>();
+    List<Button> whiteKeys = new ArrayList<>();
+    List<Button> functionKeys = new ArrayList<>();
     int[] blackKeyPositions = { 15, 17, 20, 22, 24, 27, 29, 32, 34, 36, 39, 41, 44, 46, 48, 51, 53, 56, 58, 60, 63, 65,
             68, 70, 72 };
     int[] whiteKeyPositions = { 14, 16, 18, 19, 21, 23, 25, 26, 28, 30, 31, 33, 35, 37, 38, 40, 42, 43, 45, 47, 49, 50,
@@ -46,9 +46,7 @@ public class Mainframe {
         }
 
         public boolean check(int x, int y) {
-            if (x >= xLeft && x <= xRight && y >= yUp && y <= yDown)
-                return true;
-            return false;
+            return (x >= xLeft && x <= xRight && y >= yUp && y <= yDown);
         }
     }
 
@@ -217,7 +215,7 @@ public class Mainframe {
         }
 
         public void setInstrument(int option) {
-            if (this.ON == false)
+            if (!this.ON)
                 return;
             if (option < 0)
                 option = 0;
