@@ -16,14 +16,14 @@
             "request": "launch",
             "mainClass": "app.App",
             "projectName": "KeyboardFX_22996ef3",
-            "vmArgs": "--module-path D:/alicj/KatalogDeOskar/Projects/KeyboardFX/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path E:/Project-keyboard/KeyboardFX/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
         },
         {
             "type": "java",
             "name": "Launch App(1)",
             "request": "launch",
             "mainClass": "app.App",
-            "vmArgs": "--module-path D:/alicj/KatalogDeOskar/Projects/KeyboardFX/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path E:/Project-keyboard/KeyboardFX/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
         }
     ]
 }
