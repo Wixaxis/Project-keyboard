@@ -1,0 +1,32 @@
+* {
+    -fx-background-color: linear-gradient(to bottom, #002747, #002747);
+}
+
+/* !To see layout of keys delete last two zeros from -fx-background-color: #XXXXXX00; */
+
+.left_button {
+    -fx-background-color: #b6000000;
+    -fx-shape: "M 0 0 Q 12 0 24 0 q 0 -13 0 -22 q -5.5 0 -11 0 Q 13 -50.5 13 -62 q -6.5 0 -13 0";
+}
+
+.center_button {
+    -fx-background-color: #00bd3f00;
+    -fx-shape: "M 0 0 q 0 0 0 0 q 0 -4 0 -9 q 2 0 3 0 q 0 -8 0 -16 q 3 0 7 0 q 0 9 0 16 q 2 0 3 0 q 0 4 0 9";
+}
+
+.right_button {
+    -fx-background-color: #b0bd0000;
+    -fx-shape: "M 0 0 M 27 -22 L 38 -22 q -5.5 0 -11 0 q 0 11 0 22 q 11.5 0 23 0 q 0 -31 0 -62 q -6 0 -12 0 q 0 20 0 40";
+}
+
+.black_button {
+    -fx-background-color: #00ffdd00;
+}
+
+.func_button {
+    -fx-background-color: #ff000000;
+}
+
+.button_clicked {
+    -fx-background-color: linear-gradient(to bottom, #008bfd, #00386679);
+}
