@@ -47,12 +47,12 @@ public class CurrentStatus {
             new Mainframe.ButtonData(474, 83, 494, 105, 6), // Mainframe.ButtonData instrument 3
             new Mainframe.ButtonData(501, 83, 520, 105, 7), // Mainframe.ButtonData instrument 4
 
-            new Mainframe.ButtonData(568, 83, 588, 105, 8), // Mainframe.ButtonData dummy
-            new Mainframe.ButtonData(618, 83, 638, 105, 9), // Mainframe.ButtonData dummy
-            new Mainframe.ButtonData(646, 83, 665, 105, 10), // Mainframe.ButtonData dummy
-            new Mainframe.ButtonData(673, 83, 692, 105, 11), // Mainframe.ButtonData dummy
-            new Mainframe.ButtonData(714, 83, 733, 105, 12), // Mainframe.ButtonData dummy
-            new Mainframe.ButtonData(742, 83, 759, 105, 13), // Mainframe.ButtonData dummy
+            new Mainframe.ButtonData(557, 83, 578, 105, 8), // Mainframe.ButtonData dummy
+            new Mainframe.ButtonData(607, 83, 628, 105, 9), // Mainframe.ButtonData dummy
+            new Mainframe.ButtonData(634, 83, 654, 105, 10), // Mainframe.ButtonData dummy
+            new Mainframe.ButtonData(661, 83, 680, 105, 11), // Mainframe.ButtonData dummy
+            new Mainframe.ButtonData(701, 83, 721, 105, 12), // Mainframe.ButtonData dummy
+            new Mainframe.ButtonData(727, 83, 747, 105, 13), // Mainframe.ButtonData dummy
 
             new Mainframe.ButtonData(61, 90, 14), // Mainframe.ButtonData white
             new Mainframe.ButtonData(80, 96, 15), // Mainframe.ButtonData black
