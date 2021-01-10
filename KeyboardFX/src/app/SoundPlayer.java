@@ -1,14 +1,40 @@
 package app;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
+import javafx.scene.input.KeyEvent;
 
 public class SoundPlayer {
 
     private static final SoundPlayer SOUND_PLAYER = new SoundPlayer();
     private CurrentStatus currStat = null;
+    private final Map<Character, Integer> soundsMap = new HashMap<>();
 
-    private SoundPlayer(){}
+    private SoundPlayer(){
+        String keyboardInput = "asdfghjklqwertyuiopASDFGHJKLQWERTYUIOP";
+        int currentSound = 14;
+        int stringIterator = 0;
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 3; j++) {
+                soundsMap.put(keyboardInput.charAt(stringIterator++), currentSound);
+                currentSound += 2;
+            }
+            currentSound--;
+
+            for (int j = 0; j < 4; j++) {
+                soundsMap.put(keyboardInput.charAt(stringIterator++), currentSound);
+                currentSound += 2;
+            }
+            currentSound--;
+        }
+    }
 
     
     public static SoundPlayer getSoundPlayer() {
@@ -39,12 +65,30 @@ public class SoundPlayer {
             e.printStackTrace();
         }
 
-        if (clip.isRunning()) {
-            clip.stop();
-        }
-
+        clip.flush();
         clip.setMicrosecondPosition(0);
+        try {
+            Thread.sleep(70);
+        } catch (InterruptedException ignored){}
         clip.start();
+    }
+
+    private int eventToInt(KeyEvent event) {
+        
+        if (event.getText().length() == 0) return -1;
+                
+        char keyPressed = event.getText().charAt(0);
+        int playedSound = soundsMap.get(keyPressed);
+        
+        if (event.isShiftDown()) playedSound += 32;
+        if (event.isAltDown()) playedSound += 1;
+        if (playedSound  > 72) return 1;
+        return playedSound;
+    }
+
+    public void playSound(KeyEvent event) {
+        System.out.println(eventToInt(event));
+        playSound(eventToInt(event));
     }
     
     public void setCurrentStatus(CurrentStatus currentStatus) {

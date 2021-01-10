@@ -25,7 +25,7 @@ public class App extends Application {
             scene.setOnKeyPressed((EventHandler<? super KeyEvent>)new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent event) {
-                    soundPlayer.playSound(14);
+                    soundPlayer.playSound(event);
                 }
             });
             
