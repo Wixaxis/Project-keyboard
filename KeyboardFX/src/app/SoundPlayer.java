@@ -78,7 +78,7 @@ public class SoundPlayer {
         
         if (event.isShiftDown()) playedSound += 32;
         if (event.isAltDown()) playedSound += 1;
-        if (playedSound  > 72) return 1;
+        if (playedSound  > 72) return -1;
         return playedSound;
     }
 
