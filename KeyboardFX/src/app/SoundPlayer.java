@@ -2,10 +2,6 @@ package app;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import javafx.scene.input.KeyEvent;
