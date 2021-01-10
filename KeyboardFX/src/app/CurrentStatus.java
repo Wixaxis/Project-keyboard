@@ -25,6 +25,11 @@ public class CurrentStatus {
     protected final String[] instruments = { "PIANO", "E.PIANO", "ORGAN", "HARPE", "STRINGS" };
     protected List<Clip> soundClips = new ArrayList<>();
     private double initialWidth = 1284;
+    private static final String[] colours = {"linear-gradient(to right, #c31432, #240b36);", "linear-gradient(to right, #34e89e, #0f3443);",
+                                            "linear-gradient(to right, #6190E8, #A7BFE8);", "linear-gradient(to right, #44A08D, #093637);",
+                                            "linear-gradient(to right, #43C6AC, #F8FFAE);", "linear-gradient(to right, #FFAFBD, #ffc3a0);",
+                                            "linear-gradient(to right, #8CBC00, #636FA4);", "linear-gradient(to right, #c0c0aa, #1cefff);"};
+    private static int currentColour = 1;
 
     public void setAnchorAndImage(AnchorPane anPain, ImageView image) {
         this.anPain = anPain;
@@ -204,6 +209,12 @@ public class CurrentStatus {
         t.setDaemon(true);
         t.start();
 
+    }
+
+    public void changeBackgroundColour() {
+        anPain.setStyle("-fx-background-color: " + colours[currentColour]);
+        currentColour++;
+        if (currentColour == colours.length) currentColour = 0;
     }
 
     private class ButtonShadeOff implements Runnable {

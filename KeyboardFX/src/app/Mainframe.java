@@ -118,8 +118,12 @@ public class Mainframe {
             currStat.volumeUp();
         if (2 == fun)
             currStat.volumeDown();
-        if (fun > 2 && fun < 8)
+        if (fun > 2 && fun < 8) {
             currStat.setInstrument(fun - 3);
+        }
+        if (12 == fun) {
+            currStat.changeBackgroundColour();
+        }
         currStat.shadeButton(fun, 0.3);
     }
 
