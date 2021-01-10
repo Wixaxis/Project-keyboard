@@ -68,7 +68,7 @@ public class SoundPlayer {
         } catch (InterruptedException ignored) {
         }
         clip.start();
-        currStat.shadeButton(sound, 0.5);
+        currStat.shadeButton(sound, 0.2);
     }
 
     private int eventToInt(KeyEvent event) {
@@ -77,8 +77,13 @@ public class SoundPlayer {
             return -1;
 
         char keyPressed = event.getText().charAt(0);
-        int playedSound = soundsMap.get(keyPressed);
-
+        int playedSound = -1;
+        try {
+            playedSound = soundsMap.get(keyPressed);
+        } catch (Exception ignore) {
+        }
+        if (playedSound == -1)
+            return -1;
         if (event.isShiftDown())
             playedSound += 32;
         if (event.isAltDown())
