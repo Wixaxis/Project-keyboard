@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
+
 import javafx.scene.input.KeyEvent;
 
 public class SoundPlayer {
@@ -12,7 +13,7 @@ public class SoundPlayer {
     private CurrentStatus currStat = null;
     private final Map<Character, Integer> soundsMap = new HashMap<>();
 
-    private SoundPlayer(){
+    private SoundPlayer() {
         String keyboardInput = "asdfghjklqwertyuiopASDFGHJKLQWERTYUIOP";
         int currentSound = 14;
         int stringIterator = 0;
@@ -32,7 +33,6 @@ public class SoundPlayer {
         }
     }
 
-    
     public static SoundPlayer getSoundPlayer() {
         return SOUND_PLAYER;
     }
@@ -50,7 +50,7 @@ public class SoundPlayer {
             System.out.println("Volume is 0");
             return;
         }
-        
+
         Clip clip = currStat.soundClips.get(sound - 14 + 1);
         FloatControl gain = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         float dB = (float) (Math.log(currStat.volume + 1.0) / Math.log(10) * 20) - 15.0f;
@@ -65,20 +65,26 @@ public class SoundPlayer {
         clip.setMicrosecondPosition(0);
         try {
             Thread.sleep(70);
-        } catch (InterruptedException ignored){}
+        } catch (InterruptedException ignored) {
+        }
         clip.start();
+        // currStat.shadeButton(sound, 2.0);
     }
 
     private int eventToInt(KeyEvent event) {
-        
-        if (event.getText().length() == 0) return -1;
-                
+
+        if (event.getText().length() == 0)
+            return -1;
+
         char keyPressed = event.getText().charAt(0);
         int playedSound = soundsMap.get(keyPressed);
-        
-        if (event.isShiftDown()) playedSound += 32;
-        if (event.isAltDown()) playedSound += 1;
-        if (playedSound  > 72) return -1;
+
+        if (event.isShiftDown())
+            playedSound += 32;
+        if (event.isAltDown())
+            playedSound += 1;
+        if (playedSound > 72)
+            return -1;
         return playedSound;
     }
 
@@ -86,7 +92,7 @@ public class SoundPlayer {
         System.out.println(eventToInt(event));
         playSound(eventToInt(event));
     }
-    
+
     public void setCurrentStatus(CurrentStatus currentStatus) {
         currStat = currentStatus;
     }

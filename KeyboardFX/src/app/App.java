@@ -26,6 +26,7 @@ public class App extends Application {
                 @Override
                 public void handle(KeyEvent event) {
                     soundPlayer.playSound(event);
+                    
                 }
             });
             
