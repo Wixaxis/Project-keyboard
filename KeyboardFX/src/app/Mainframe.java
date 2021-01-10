@@ -140,25 +140,6 @@ public class Mainframe {
     private Label statusLabel;
 
     @FXML
-    private javafx.scene.control.Button leftButton1, leftButton2, leftButton3, leftButton4, leftButton5, leftButton6, leftButton7, leftButton8, leftButton9, leftButton10;
-    
-    @FXML
-    private javafx.scene.control.Button centerButton1, centerButton2, centerButton3, centerButton4, centerButton5, centerButton6, centerButton7,
-    centerButton8, centerButton9, centerButton10, centerButton11, centerButton12, centerButton13, centerButton14, centerButton15;
-
-    @FXML
-    private javafx.scene.control.Button rightButton1, rightButton2, rightButton3, rightButton4, rightButton5, rightButton6, rightButton7, rightButton8, rightButton9, rightButton10;
-    
-    @FXML
-    private javafx.scene.control.Button blackButton1, blackButton2, blackButton3, blackButton4, blackButton5, blackButton6, blackButton7,
-    blackButton8, blackButton9, blackButton10, blackButton11, blackButton12, blackButton13, blackButton14, blackButton15, blackButton16,
-    blackButton17, blackButton18, blackButton19, blackButton20, blackButton21, blackButton22, blackButton23, blackButton24;
-
-    @FXML
-    private javafx.scene.control.Button funcButton1, funcButton2, funcButton3, funcButton4, funcButton5, funcButton6, funcButton7, funcButton8;
-
-
-    @FXML
     void initialize() {
         assert mainAnPane != null : "fx:id=\"mainAnPane\" was not injected: check your FXML file 'Mainframe.fxml'.";
         assert theImage != null : "fx:id=\"theImage\" was not injected: check your FXML file 'Mainframe.fxml'.";
@@ -190,6 +171,7 @@ public class Mainframe {
 
 
     private void displayCurrentStatus() {
+        System.out.println("Setting status");
         statusLabel.setText(String.format("Power: %s | Volume: %d | Instrument: %s", currStat.ON ? "ON" : "OFF",
                 currStat.volume, currStat.instruments[currStat.instrument]));
     }
