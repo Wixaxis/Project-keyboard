@@ -60,13 +60,9 @@ public class SoundPlayer {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        clip.stop();
         clip.flush();
         clip.setMicrosecondPosition(0);
-        try {
-            Thread.sleep(70);
-        } catch (InterruptedException ignored) {
-        }
         clip.start();
         currStat.shadeButton(sound, 0.2);
     }
