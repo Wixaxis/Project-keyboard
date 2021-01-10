@@ -68,7 +68,7 @@ public class SoundPlayer {
         } catch (InterruptedException ignored) {
         }
         clip.start();
-        // currStat.shadeButton(sound, 2.0);
+        currStat.shadeButton(sound, 0.5);
     }
 
     private int eventToInt(KeyEvent event) {

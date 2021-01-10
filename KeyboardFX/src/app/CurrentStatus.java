@@ -11,11 +11,14 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class CurrentStatus {
     protected AnchorPane anPain;
+    protected ImageView theImage;
     protected boolean ON = false;
     protected int volume = 5;
     protected int instrument = 0;
@@ -23,8 +26,9 @@ public class CurrentStatus {
     protected List<Clip> soundClips = new ArrayList<>();
     private double initialWidth = 1284;
 
-    public void setAnchorPane(AnchorPane anPain) {
+    public void setAnchorAndImage(AnchorPane anPain, ImageView image) {
         this.anPain = anPain;
+        this.theImage = image;
     }
 
     public final Mainframe.ButtonData[] buttons = { // buttons placements
@@ -148,18 +152,6 @@ public class CurrentStatus {
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
-        class ButtonShade extends Thread {
-            int sound;
-
-            ButtonShade(int sound) {
-                this.sound = sound;
-            }
-
-            @Override
-            public void run() {
-                Button btn = new Button();
-            }
-        }
     }
 
     public void updateSoundsLibrary() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
@@ -177,33 +169,67 @@ public class CurrentStatus {
         return (int) (xory * (initialWidth / width));
     }
 
-    public void shadeButton(int buttonNo, double seconds) {
-        new ButtonShade(buttonNo, seconds).start();
+    public int getButtonXorYInNewSpace(double width, double xory) {
+        return (int) (xory * (width / initialWidth));
     }
 
-    private class ButtonShade{
-        int sound;
-        double duration;
+    public void shadeButton(int buttonNo, double seconds) {
+        Button btn = new Button();
+        SimpleRelativeShape shp = new SimpleRelativeShape(buttons[buttonNo]);
+        double x = shp.leftX;
+        double y = shp.upY;
+        AnchorPane.setLeftAnchor(btn, x);
+        AnchorPane.setTopAnchor(btn, y);
+        double width = shp.rightX - x;
+        double height = shp.downY - y;
+        btn.setMaxHeight(height);
+        btn.setPrefHeight(height);
+        btn.setMinHeight(height);
+        btn.setMaxWidth(width);
+        btn.setPrefWidth(width);
+        btn.setMinWidth(width);
+        btn.setStyle("-fx-background-color:blue; -fx-opacity:30%;");
+        anPain.getChildren().add(btn);
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep((long) (seconds * 1000));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Platform.runLater(new ButtonShadeOff(btn));
+            }
+        });
+        t.setDaemon(true);
+        t.start();
 
-        ButtonShade(int sound, double duration) {
-            this.sound = sound;
-            this.duration = duration;
+    }
+
+    private class ButtonShadeOff implements Runnable {
+        Button btn;
+
+        ButtonShadeOff(Button btn) {
+            this.btn = btn;
         }
 
-       public void start() {
-            Button btn = new Button();
-            double x = (double) buttons[sound].xLeft;
-            double y = (double) buttons[sound].yUp;
-            AnchorPane.setLeftAnchor(btn, x); // distance 0 from right side of
-            AnchorPane.setTopAnchor(btn, y);
-            btn.setStyle("background-color:blue");
-            anPain.getChildren().add(btn);
-            try {
-                Thread.sleep((long) (duration * 1000));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        @Override
+        public void run() {
             anPain.getChildren().remove(btn);
+        }
+    }
+
+    public class SimpleRelativeShape {
+        double leftX;
+        double rightX;
+        double upY;
+        double downY;
+
+        SimpleRelativeShape(Mainframe.ButtonData btn) {
+            leftX = getButtonXorYInNewSpace(theImage.getFitWidth(), btn.xLeft);
+            rightX = getButtonXorYInNewSpace(theImage.getFitWidth(), btn.xRight);
+            upY = getButtonXorYInNewSpace(theImage.getFitWidth(), btn.yUp);
+            downY = getButtonXorYInNewSpace(theImage.getFitWidth(), btn.yDown);
         }
     }
 }
