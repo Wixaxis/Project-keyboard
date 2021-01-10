@@ -74,7 +74,7 @@ public class Mainframe {
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
-        currStat.setAnchorAndImage(mainAnPane,theImage);
+        currStat.setAnchorAndImage(mainAnPane, theImage);
         soundPlayer.setCurrentStatus(currStat);
     }
 
@@ -120,6 +120,7 @@ public class Mainframe {
             currStat.volumeDown();
         if (fun > 2 && fun < 8)
             currStat.setInstrument(fun - 3);
+        currStat.shadeButton(fun, 0.3);
     }
 
     private void decideAction(int x, int y) {
@@ -161,6 +162,5 @@ public class Mainframe {
             return (x >= xLeft && x <= xRight && y >= yUp && y <= yDown);
         }
     }
-
 
 }

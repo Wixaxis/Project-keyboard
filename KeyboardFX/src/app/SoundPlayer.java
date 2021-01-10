@@ -8,7 +8,6 @@ import javax.sound.sampled.FloatControl;
 import javafx.scene.input.KeyEvent;
 
 public class SoundPlayer {
-
     private static final SoundPlayer SOUND_PLAYER = new SoundPlayer();
     private CurrentStatus currStat = null;
     private final Map<Character, Integer> soundsMap = new HashMap<>();
@@ -64,11 +63,13 @@ public class SoundPlayer {
         clip.stop();
         try {
             Thread.sleep(1);
-        } catch (InterruptedException ignored) {}
+        } catch (InterruptedException ignored) {
+        }
         clip.flush();
         clip.setMicrosecondPosition(0);
         clip.start();
         currStat.shadeButton(sound, 0.2);
+        // currStat.shadeButton(0, 1);
     }
 
     private int eventToInt(KeyEvent event) {

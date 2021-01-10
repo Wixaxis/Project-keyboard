@@ -8,12 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-
 public class App extends Application {
-    
+
     private static final int WIDTH = 1300;
-    private static final int HEIGHT = 420;
-    
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
@@ -21,19 +19,19 @@ public class App extends Application {
             Parent root = (Parent) fxmlLoader.load();
             Scene scene = new Scene(root);
             SoundPlayer soundPlayer = SoundPlayer.getSoundPlayer();
-
-            scene.setOnKeyPressed((EventHandler<? super KeyEvent>)new EventHandler<KeyEvent>() {
+            scene.setOnKeyPressed((EventHandler<? super KeyEvent>) new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent event) {
                     soundPlayer.playSound(event);
-                    
                 }
             });
-            
+
             primaryStage.setTitle("KeyboardFX");
             primaryStage.setScene(scene);
+            primaryStage.setMinWidth(800);
+            primaryStage.minHeightProperty().bind(scene.widthProperty().divide(1300.0 / 460.0));
+            primaryStage.maxHeightProperty().bind(scene.widthProperty().divide(1300.0 / 460.0));
             primaryStage.setWidth(WIDTH);
-            primaryStage.setHeight(HEIGHT);
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
