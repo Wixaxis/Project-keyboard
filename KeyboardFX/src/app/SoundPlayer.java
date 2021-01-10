@@ -60,7 +60,11 @@ public class SoundPlayer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         clip.stop();
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException ignored) {}
         clip.flush();
         clip.setMicrosecondPosition(0);
         clip.start();
