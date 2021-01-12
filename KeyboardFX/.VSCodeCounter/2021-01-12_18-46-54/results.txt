@@ -1,0 +1,52 @@
+Date : 2021-01-12 18:46:54
+Directory : e:\Project-keyboard\KeyboardFX
+Total : 17 files,  2601 codes, 1 comments, 499 blanks, all 3101 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Markdown   |         11 |      1,975 |          0 |        407 |      2,382 |
+| Java       |          4 |        608 |          1 |         88 |        697 |
+| XML        |          1 |         15 |          0 |          3 |         18 |
+| Properties |          1 |          3 |          0 |          1 |          4 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                              | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                 |         17 |      2,601 |          1 |        499 |      3,101 |
+| javafx-sdk-15.0.1                                                                 |         11 |      1,970 |          0 |        401 |      2,371 |
+| javafx-sdk-15.0.1\legal                                                           |         10 |      1,967 |          0 |        400 |      2,367 |
+| javafx-sdk-15.0.1\legal\javafx.graphics                                           |          2 |        141 |          0 |         46 |        187 |
+| javafx-sdk-15.0.1\legal\javafx.media                                              |          4 |        924 |          0 |        206 |      1,130 |
+| javafx-sdk-15.0.1\legal\javafx.web                                                |          4 |        902 |          0 |        148 |      1,050 |
+| javafx-sdk-15.0.1\lib                                                             |          1 |          3 |          0 |          1 |          4 |
+| src                                                                               |          5 |        623 |          1 |         91 |        715 |
+| src\app                                                                           |          5 |        623 |          1 |         91 |        715 |
++-----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                          | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| e:\Project-keyboard\KeyboardFX\README.md                                          | Markdown   |          8 |          0 |          7 |         15 |
+| e:\Project-keyboard\KeyboardFX\javafx-sdk-15.0.1\legal\javafx.graphics\jpeg_fx.md | Markdown   |         42 |          0 |         10 |         52 |
+| e:\Project-keyboard\KeyboardFX\javafx-sdk-15.0.1\legal\javafx.graphics\mesa3d.md  | Markdown   |         99 |          0 |         36 |        135 |
+| e:\Project-keyboard\KeyboardFX\javafx-sdk-15.0.1\legal\javafx.media\directshow.md | Markdown   |         20 |          0 |          7 |         27 |
+| e:\Project-keyboard\KeyboardFX\javafx-sdk-15.0.1\legal\javafx.media\glib.md       | Markdown   |        441 |          0 |         97 |        538 |
+| e:\Project-keyboard\KeyboardFX\javafx-sdk-15.0.1\legal\javafx.media\gstreamer.md  | Markdown   |        441 |          0 |         95 |        536 |
+| e:\Project-keyboard\KeyboardFX\javafx-sdk-15.0.1\legal\javafx.media\libffi.md     | Markdown   |         22 |          0 |          7 |         29 |
+| e:\Project-keyboard\KeyboardFX\javafx-sdk-15.0.1\legal\javafx.web\icu_web.md      | Markdown   |        391 |          0 |         31 |        422 |
+| e:\Project-keyboard\KeyboardFX\javafx-sdk-15.0.1\legal\javafx.web\libxml2.md      | Markdown   |         23 |          0 |          8 |         31 |
+| e:\Project-keyboard\KeyboardFX\javafx-sdk-15.0.1\legal\javafx.web\libxslt.md      | Markdown   |         47 |          0 |         14 |         61 |
+| e:\Project-keyboard\KeyboardFX\javafx-sdk-15.0.1\legal\javafx.web\webkit.md       | Markdown   |        441 |          0 |         95 |        536 |
+| e:\Project-keyboard\KeyboardFX\javafx-sdk-15.0.1\lib\javafx.properties            | Properties |          3 |          0 |          1 |          4 |
+| e:\Project-keyboard\KeyboardFX\src\app\App.java                                   | Java       |         38 |          0 |          6 |         44 |
+| e:\Project-keyboard\KeyboardFX\src\app\CurrentStatus.java                         | Java       |        320 |          0 |         37 |        357 |
+| e:\Project-keyboard\KeyboardFX\src\app\Mainframe.fxml                             | XML        |         15 |          0 |          3 |         18 |
+| e:\Project-keyboard\KeyboardFX\src\app\Mainframe.java                             | Java       |        162 |          0 |         29 |        191 |
+| e:\Project-keyboard\KeyboardFX\src\app\SoundPlayer.java                           | Java       |         88 |          1 |         16 |        105 |
+| Total                                                                             |            |      2,601 |          1 |        499 |      3,101 |
++-----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
