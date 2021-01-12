@@ -71,6 +71,7 @@ public class Mainframe {
         displayCurrentStatus();
         try {
             currStat.updateSoundsLibrary();
+            currStat.loadCurrentBackingTrack();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
@@ -86,8 +87,9 @@ public class Mainframe {
 
     private void displayCurrentStatus() {
         System.out.println("Setting status");
-        statusLabel.setText(String.format("Power: %s | Volume: %d | Instrument: %s", currStat.ON ? "ON" : "OFF",
-                currStat.volume, currStat.instruments[currStat.instrument]));
+        statusLabel.setText(String.format("Power: %s | Volume: %d | Instrument: %s | Backing Track: %s [%s]",
+                currStat.ON ? "ON" : "OFF", currStat.volume, currStat.instruments[currStat.instrument],
+                currStat.getCurrBackingName(), currStat.isBackingRunning ? "PLAYING" : "PAUSED"));
     }
 
     private int getFunctionKey(int x, int y) {
@@ -114,16 +116,34 @@ public class Mainframe {
         }
         if (0 == fun)
             currStat.powerSwitch();
-        if (1 == fun)
-            currStat.volumeUp();
-        if (2 == fun)
-            currStat.volumeDown();
-        if (fun > 2 && fun < 8) {
-            currStat.setInstrument(fun - 3);
+        if (currStat.ON) {
+            if (1 == fun)
+                currStat.volumeUp();
+            if (2 == fun)
+                currStat.volumeDown();
+            if (fun > 2 && fun < 8) {
+                currStat.setInstrument(fun - 3);
+            }
+            if (8 == fun) {
+                theImage.setImage(currStat.shiftImage());
+            }
+            if (9 == fun) {
+                currStat.previousBackingTrack();
+            }
+            if (10 == fun) {
+                currStat.nextBackingTrack();
+            }
+            if (11 == fun) {
+                currStat.playPauseBackingTrack();
+            }
+            if (13 == fun) {
+                currStat.resetBacking();
+            }
         }
         if (12 == fun) {
             currStat.changeBackgroundColour();
         }
+
         currStat.shadeButton(fun, 0.3);
     }
 

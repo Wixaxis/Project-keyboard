@@ -8,11 +8,13 @@ import java.util.List;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -25,11 +27,18 @@ public class CurrentStatus {
     protected final String[] instruments = { "PIANO", "E.PIANO", "ORGAN", "HARPE", "STRINGS" };
     protected List<Clip> soundClips = new ArrayList<>();
     private double initialWidth = 1284;
-    private static final String[] colours = {"linear-gradient(to right, #c31432, #240b36);", "linear-gradient(to right, #34e89e, #0f3443);",
-                                            "linear-gradient(to right, #6190E8, #A7BFE8);", "linear-gradient(to right, #44A08D, #093637);",
-                                            "linear-gradient(to right, #43C6AC, #F8FFAE);", "linear-gradient(to right, #FFAFBD, #ffc3a0);",
-                                            "linear-gradient(to right, #8CBC00, #636FA4);", "linear-gradient(to right, #c0c0aa, #1cefff);"};
+    private static final String[] colours = { "linear-gradient(to right, #c31432, #240b36);",
+            "linear-gradient(to right, #34e89e, #0f3443);", "linear-gradient(to right, #6190E8, #A7BFE8);",
+            "linear-gradient(to right, #44A08D, #093637);", "linear-gradient(to right, #43C6AC, #F8FFAE);",
+            "linear-gradient(to right, #FFAFBD, #ffc3a0);", "linear-gradient(to right, #8CBC00, #636FA4);",
+            "linear-gradient(to right, #c0c0aa, #1cefff);" };
     private static int currentColour = 1;
+    private static final String[] images = { "keyboard.png", "keyboardKeyCaps.png" };
+    private static int currentImage = 0;
+    private static String[] backingTracks = { "Pokemon Theme.wav", "Rick Astley - Never Gonna Give You up.wav" };
+    protected Clip currentBackingClip = null;
+    private static int currentBackingTrack = 0;
+    public boolean isBackingRunning = false;
 
     public void setAnchorAndImage(AnchorPane anPain, ImageView image) {
         this.anPain = anPain;
@@ -130,17 +139,32 @@ public class CurrentStatus {
         } else {
             System.out.println("Turning OFF");
             this.volume = 0;
+            resetBacking();
         }
     }
 
     public void volumeUp() {
         if (this.volume < 10 && this.ON)
             this.volume++;
+        FloatControl gain = (FloatControl) currentBackingClip.getControl(FloatControl.Type.MASTER_GAIN);
+        float dB = (float) (Math.log(volume + 1.0) / Math.log(10) * 20) - 15.0f;
+        try {
+            gain.setValue(dB);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void volumeDown() {
         if (this.volume > 0 && this.ON)
             this.volume--;
+        FloatControl gain = (FloatControl) currentBackingClip.getControl(FloatControl.Type.MASTER_GAIN);
+        float dB = (float) (Math.log(volume + 1.0) / Math.log(10) * 20) - 15.0f;
+        try {
+            gain.setValue(dB);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setInstrument(int option) {
@@ -214,7 +238,8 @@ public class CurrentStatus {
     public void changeBackgroundColour() {
         anPain.setStyle("-fx-background-color: " + colours[currentColour]);
         currentColour++;
-        if (currentColour == colours.length) currentColour = 0;
+        if (currentColour == colours.length)
+            currentColour = 0;
     }
 
     private class ButtonShadeOff implements Runnable {
@@ -242,5 +267,91 @@ public class CurrentStatus {
             upY = getButtonXorYInNewSpace(theImage.getFitWidth(), btn.yUp);
             downY = getButtonXorYInNewSpace(theImage.getFitWidth(), btn.yDown);
         }
+    }
+
+    public Image shiftImage() {
+        currentImage = (currentImage + 1) % 2;
+        return new Image(new File("src/app/images/" + images[currentImage]).toURI().toString());
+    }
+
+    public void loadCurrentBackingTrack() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        File file = new File(String.format("src/app/backingTracks/%s", backingTracks[currentBackingTrack]));
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioStream);
+        clip.loop(100);
+        clip.stop();
+        currentBackingClip = clip;
+    }
+
+    public void nextBackingTrack() {
+        if (isBackingRunning)
+            currentBackingClip.stop();
+        if (currentBackingTrack >= backingTracks.length - 1) {
+            currentBackingTrack = 0;
+        } else
+            currentBackingTrack++;
+        try {
+            loadCurrentBackingTrack();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ignore) {
+        }
+        FloatControl gain = (FloatControl) currentBackingClip.getControl(FloatControl.Type.MASTER_GAIN);
+        float dB = (float) (Math.log(volume + 1.0) / Math.log(10) * 20) - 15.0f;
+        try {
+            gain.setValue(dB);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (isBackingRunning) {
+            currentBackingClip.flush();
+            currentBackingClip.setMicrosecondPosition(0);
+            currentBackingClip.start();
+        }
+    }
+
+    public void previousBackingTrack() {
+        if (isBackingRunning)
+            currentBackingClip.stop();
+        if (currentBackingTrack <= 0) {
+            currentBackingTrack = backingTracks.length - 1;
+        } else
+            currentBackingTrack--;
+        try {
+            loadCurrentBackingTrack();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ignore) {
+        }
+        FloatControl gain = (FloatControl) currentBackingClip.getControl(FloatControl.Type.MASTER_GAIN);
+        float dB = (float) (Math.log(volume + 1.0) / Math.log(10) * 20) - 15.0f;
+        try {
+            gain.setValue(dB);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (isBackingRunning) {
+            currentBackingClip.flush();
+            currentBackingClip.setMicrosecondPosition(0);
+            currentBackingClip.start();
+        }
+    }
+
+    public void playPauseBackingTrack() {
+        if (isBackingRunning) {
+            isBackingRunning = false;
+            currentBackingClip.stop();
+        } else {
+            isBackingRunning = true;
+            currentBackingClip.start();
+        }
+    }
+
+    public String getCurrBackingName() {
+        return backingTracks[currentBackingTrack];
+    }
+
+    public void resetBacking() {
+        if (isBackingRunning)
+            playPauseBackingTrack();
+        currentBackingClip.flush();
+        currentBackingClip.setMicrosecondPosition(0);
     }
 }
