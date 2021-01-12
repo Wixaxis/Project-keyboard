@@ -36,7 +36,7 @@ public class CurrentStatus {
 
     private static final String[] images = { "keyboard.png", "keyboardKeyCaps.png" };
     private static int currentImage = 0;
-    
+
     private static String[] backingTracks = { "Pokemon Theme.wav", "Rick Astley - Never Gonna Give You up.wav" };
     protected Clip currentBackingClip = null;
     private static int currentBackingTrack = 0;
@@ -219,7 +219,7 @@ public class CurrentStatus {
         btn.setMaxWidth(width);
         btn.setPrefWidth(width);
         btn.setMinWidth(width);
-        btn.setStyle("-fx-background-color:blue; -fx-opacity:30%;");
+        btn.setStyle("-fx-background-color:blue; -fx-opacity:30%;" + buttons[buttonNo].myShape);
         anPain.getChildren().add(btn);
         Thread t = new Thread(new Runnable() {
             @Override

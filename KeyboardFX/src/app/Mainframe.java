@@ -12,6 +12,39 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javax.sound.sampled.*;
 
+// * {
+//     -fx-background-color: linear-gradient(to bottom, #002747, #002747);
+// }
+
+// /* !To see layout of keys delete last two zeros from -fx-background-color: #XXXXXX00; */
+
+// .left_button {
+//     -fx-background-color: #b6000000;
+//     -fx-shape: "M 0 0 Q 12 0 24 0 q 0 -13 0 -22 q -5.5 0 -11 0 Q 13 -50.5 13 -62 q -6.5 0 -13 0";
+// }
+
+// .center_button {
+//     -fx-background-color: #00bd3f00;
+//     -fx-shape: "M 0 0 q 0 0 0 0 q 0 -4 0 -9 q 2 0 3 0 q 0 -8 0 -16 q 3 0 7 0 q 0 9 0 16 q 2 0 3 0 q 0 4 0 9";
+// }
+
+// .right_button {
+//     -fx-background-color: #b0bd0000;
+//     -fx-shape: "M 0 0 M 27 -22 L 38 -22 q -5.5 0 -11 0 q 0 11 0 22 q 11.5 0 23 0 q 0 -31 0 -62 q -6 0 -12 0 q 0 20 0 40";
+// }
+
+// .black_button {
+//     -fx-background-color: #00ffdd00;
+// }
+
+// .func_button {
+//     -fx-background-color: #ff000000;
+// }
+
+// .button_clicked {
+//     -fx-background-color: linear-gradient(to bottom, #008bfd, #00386679);
+// }
+
 public class Mainframe {
 
     private int calibration = 0;
@@ -20,6 +53,12 @@ public class Mainframe {
     private SoundPlayer soundPlayer = SoundPlayer.getSoundPlayer();
     private static final boolean[] blackInOctave = { false, true, false, true, false, false, true, false, true, false,
             true, false };
+    private static final String left = "-fx-shape: \"M 0 0 Q 12 0 24 0 q 0 -13 0 -22 q -5.5 0 -11 0 Q 13 -50.5 13 -62 q -6.5 0 -13 0\";";
+    private static final String center = "-fx-shape: \"M 0 0 q 0 0 0 0 q 0 -4 0 -9 q 2 0 3 0 q 0 -8 0 -16 q 3 0 7 0 q 0 9 0 16 q 2 0 3 0 q 0 4 0 9\";";
+    private static final String right = "-fx-shape: \"M 0 0 M 27 -22 L 38 -22 q -5.5 0 -11 0 q 0 11 0 22 q 11.5 0 23 0 q 0 -31 0 -62 q -6 0 -12 0 q 0 20 0 40\";";
+
+    private static final String[] cssInOctave = { left, null, center, null, right, left, null, center, null, center,
+            null, right };
     private final List<ButtonData> blackKeys = new ArrayList<>();
     private final List<ButtonData> whiteKeys = new ArrayList<>();
     private final List<ButtonData> functionKeys = new ArrayList<>();
@@ -168,6 +207,7 @@ public class Mainframe {
         public int yUp;
         public int yDown;
         public int function;
+        public String myShape;
 
         ButtonData(int lx, int uy, int rx, int dy, int fun) {
             this.xLeft = lx;
@@ -175,6 +215,12 @@ public class Mainframe {
             this.yUp = uy;
             this.yDown = dy;
             this.function = fun;
+            if (fun >= 14) {
+                this.myShape = cssInOctave[(fun - 14) % 12];
+                if (this.myShape == null)
+                    this.myShape = "";
+            } else
+                this.myShape = "";
         }
 
         ButtonData(int lx, int rx, int fun) {
