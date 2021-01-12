@@ -16,3 +16,9 @@ Trzy rzeczy na koniec:
 - całe wystąpienie proszę zarejestrować na Teams.
 - kody źródłowe wraz z instrukcją uruchomienia wstawiamy na Wikamp
 Będziemy starać się wystawić oceny na żywo po wysłuchaniu prezentacji, ale być może niektóre z nich będą wymagaly aby odsłuchać nagrania.
+
+
+1.wstęp
+2.zespół
+3.problemy i realizacja:
+Podstawowym problemem do rozwiązania w naszym projekcie było znalezienie sposobu odczytywania wejścia użytkownika oraz poprawna realizacja wizualnej oraz dźwiękowej odpowiedzi na dane wejście. Początkowo 

@@ -33,8 +33,10 @@ public class CurrentStatus {
             "linear-gradient(to right, #FFAFBD, #ffc3a0);", "linear-gradient(to right, #8CBC00, #636FA4);",
             "linear-gradient(to right, #c0c0aa, #1cefff);" };
     private static int currentColour = 1;
+
     private static final String[] images = { "keyboard.png", "keyboardKeyCaps.png" };
     private static int currentImage = 0;
+    
     private static String[] backingTracks = { "Pokemon Theme.wav", "Rick Astley - Never Gonna Give You up.wav" };
     protected Clip currentBackingClip = null;
     private static int currentBackingTrack = 0;
