@@ -1,0 +1,18 @@
+Każda grupa ma 10 minut na prezentację swojego rozwiązania w tym dyskusja
+Proszę o przygotowanie pliku Powerpoint, w którym na 5 slajdach:
+1. Przedstawicie zespół
+2. Przedstawicie temat i problemy do rozwiązania
+3. Zaprezentujecie algorytm, jeśli urządzenie taki posiada
+4. Omówicie dodatkowe oprogramowanie i biblioteki użyte przy realizacji
+5. Krótkie podsumowanie: czy udało się wszystko skończyć, jakie musieliście przyjąć uproszczenia, czy jest może
+ pomysł na "pociągnięcie" tematu, gdyby była okazja. Czy JavaFX okazała się wg was dobrym językiem do realizacji
+ tego typu projektu.
+
+Następnie proszę o pokazanie urządzenia w działaniu. Pamiętamy o udostępnieniu dźwięku na Teams. Również proszę
+ przygotować kod programu do pokazania.
+
+Trzy rzeczy na koniec:
+- W trakcie prezentacji osoba mówiąca pokazuje się na kamerce
+- całe wystąpienie proszę zarejestrować na Teams.
+- kody źródłowe wraz z instrukcją uruchomienia wstawiamy na Wikamp
+Będziemy starać się wystawić oceny na żywo po wysłuchaniu prezentacji, ale być może niektóre z nich będą wymagaly aby odsłuchać nagrania.
