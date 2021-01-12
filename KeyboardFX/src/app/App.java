@@ -1,10 +1,13 @@
 package app;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
@@ -25,7 +28,7 @@ public class App extends Application {
                     soundPlayer.playSound(event);
                 }
             });
-
+            primaryStage.getIcons().add(new Image(App.class.getResourceAsStream("pianoicon.png")));
             primaryStage.setTitle("KeyboardFX");
             primaryStage.setScene(scene);
             primaryStage.setMinWidth(800);
