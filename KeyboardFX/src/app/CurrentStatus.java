@@ -158,6 +158,8 @@ public class CurrentStatus {
     }
 
     public void volumeDown() {
+        if (volume == 1 && isBackingRunning)
+            playPauseBackingTrack();
         if (this.volume > 0 && this.ON)
             this.volume--;
         FloatControl gain = (FloatControl) currentBackingClip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -340,7 +342,7 @@ public class CurrentStatus {
         if (isBackingRunning) {
             isBackingRunning = false;
             currentBackingClip.stop();
-        } else {
+        } else if (volume != 0) {
             isBackingRunning = true;
             currentBackingClip.start();
         }
